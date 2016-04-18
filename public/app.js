@@ -23,7 +23,6 @@ function todo($http) {
   (vm.refresh = function() {
     var todos = $http.get('http://localhost:1337/todos');
     todos.then(function(todo) {
-      console.log(todo.data);
       vm.list = todo.data;
     })
   })()
@@ -45,6 +44,21 @@ function todo($http) {
     var added = $http.post('http://localhost:1337/todos',
       { task: what }
     );
-    added.then(vm.refresh);
+    added.then(function() {
+      vm.refresh();
+    })
+  }
+
+  vm.clear = function() {
+    var removed = $http({
+      url: 'http://localhost:1337/todos',
+      method: 'DELETE',
+      headers: {'Content-type': 'application/json'},
+      data: { items: vm.completed }
+    })
+    removed.then(function() {
+      vm.completed = [];
+      vm.refresh();
+    })
   }
 }
