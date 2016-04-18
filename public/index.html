@@ -13,25 +13,13 @@
         <greeting></greeting>
       </div>
     </div>
+    <a href="#/profile"><button class="btn btn-default">Profile</button></a>
+    <a href="#/todo"><button class="btn btn-default">Todo</button></a>
+    <p></p>
   </div>
-  <div class="container" ng-controller="todoController as todo">
-    <div class="row">
-      <div class="col-md-4">
-        <add></add>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <list><list>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <clear></clear>
-      </div>
-    </div>
-  </div>
+  <div ng-view></div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
   <script src="app.js"></script>
   <script src="home/home.controller.js"></script>
   <script src="home/greeting.directive.js"></script>
