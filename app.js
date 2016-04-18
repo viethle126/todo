@@ -70,6 +70,8 @@ app.route('/todos')
     })
   })
 
+app.use(express.static('./'));
+
 if (!require.main.loaded) {
   var server = app.listen(1337);
 }
