@@ -14,6 +14,43 @@
       </div>
     </div>
   </div>
+  <div class="container" ng-controller="todoController as todo">
+    <div class="row">
+      <div class="col-md-4">
+        <form class="form-inline" ng-submit="todo.add(todo.task)">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Add a task" ng-model="todo.task">
+          </div>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="list-group">
+          <div class="list-group-item list-group-item-info">
+            <span ng-show="todo.list.length !== 0">Items: {{todo.list.length}}</span>
+            <span ng-show="todo.list.length === 0">No items remaining</span>
+          </div>
+          <div class="list-group-item" ng-repeat="item in todo.list" ng-show="!finished" ng-click="finished = !finished; todo.finished(item)">
+            <span>
+              {{item}}
+            </span>
+          </div>
+          <div class="list-group-item list-group-item-success">
+            <span ng-show="todo.completed.length !== 0">Items completed: {{todo.completed.length}}</span>
+            <span ng-show="todo.completed.length === 0">No items completed</span>
+          </div>
+          <div class="list-group-item" ng-repeat="item in todo.completed" ng-click="todo.undo(item)">
+            <span>
+              {{item}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   <script src="app.js"></script>
 </body>
