@@ -44,4 +44,17 @@ describe('Todos', function() {
       })
     })
   })
+  // read
+  describe('Get request to /todos', function() {
+    it('is reading database', function(done) {
+      request('http://localhost:1337/todos',
+        function(error, response, body) {
+          var parsed = JSON.parse(body);
+          assert.equal(error, null);
+          assert.notEqual(0, parsed.length);
+          done();
+        }
+      );
+    })
+  })
 })
