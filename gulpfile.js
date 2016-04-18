@@ -11,7 +11,7 @@ gulp.task('lint', function() {
 })
 
 gulp.task('mocha', ['lint'], function () {
-  gulp.src('app.spec.js')
+  return gulp.src('app.spec.js')
   .pipe(mocha())
 })
 
