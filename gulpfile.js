@@ -17,5 +17,5 @@ gulp.task('test', ['lint'], function () {
 
 gulp.task('default', function() {
   nodemon({ script: 'app.js' })
-  .on('start', ['mocha'])
+  .on('start', ['test'])
 })

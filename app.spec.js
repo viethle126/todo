@@ -8,7 +8,6 @@ var app = require('./app.js');
 var RANDOMIZE = 0;
 var server = app.listen(RANDOMIZE);
 var port = server.address().port;
-console.log(port);
 
 // user
 describe('Get request to /user', function() {
@@ -44,7 +43,8 @@ describe('Todos', function() {
           var todos = db.collection('todos');
           todos.find({ task: 'Test routes' }).toArray(function(error, result) {
             assert.equal(error, null);
-            assert.equal(1, result.length);
+            assert.notEqual(0, result.length);
+            items = result;
             db.close();
             done();
           })
@@ -58,7 +58,6 @@ describe('Todos', function() {
       request('http://localhost:' + port + '/todos',
         function(error, response, body) {
           var parsed = JSON.parse(body);
-          items.push(parsed[0]);
           assert.equal(error, null);
           assert.notEqual(0, parsed.length);
           done();
