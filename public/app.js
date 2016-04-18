@@ -46,6 +46,7 @@ function todo($http) {
     );
     added.then(function() {
       vm.refresh();
+      vm.task = '';
     })
   }
 

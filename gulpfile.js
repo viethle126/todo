@@ -10,12 +10,12 @@ gulp.task('lint', function() {
   .pipe(eslint.failAfterError())
 })
 
-gulp.task('mocha', ['lint'], function () {
-  gulp.src('app.spec.js')
+gulp.task('test', ['lint'], function () {
+  return gulp.src('app.spec.js')
   .pipe(mocha())
 })
 
 gulp.task('default', function() {
   nodemon({ script: 'app.js' })
-  .on('start', ['mocha'])
+  .on('start', ['test'])
 })
