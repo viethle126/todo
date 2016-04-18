@@ -33,6 +33,20 @@ app.route('/todos')
       }
     })
   })
+  .get(function(req, res) {
+    mongoClient.connect(url, function(error, db) {
+      if (!error) {
+        var todos = db.collection('todos');
+        todos.find({}).toArray(function(error, result) {
+          res.send(result);
+          db.close();
+        })
+      } else {
+        res.sendStatus(500);
+        db.close();
+      }
+    })
+  })
 
 var port = process.env.PORT || 1337;
 app.listen(port, function() {
