@@ -5,19 +5,26 @@
   <title></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app.css">
 </head>
 <body ng-app="todo">
-  <div class="container" ng-controller="homeController as home">
-    <div class="row">
-      <div class="col-md-6">
-        <greeting></greeting>
+  <div class="col-md-6 col-sm-8 wrapper">
+    <div class="container" ng-controller="homeController as home">
+      <div class="row">
+        <div class="col-md-6 col-sm-8">
+          <greeting></greeting>
+        </div>
       </div>
+      <a href="#/profile" ng-class="{'btn btn-default': !atPro, 'btn btn-danger': atPro}" ng-init="atPro=false" ng-click="atPro = true; atTodo = false">
+        Profile
+      </a>
+      <a href="#/todo" ng-class="{'btn btn-default': !atTodo, 'btn btn-danger': atTodo}" ng-init="atTodo=false" ng-click="atTodo = true; atPro = false">
+        Todo
+      </a>
+      <p></p>
     </div>
-    <a href="#/profile"><button class="btn btn-default">Profile</button></a>
-    <a href="#/todo"><button class="btn btn-default">Todo</button></a>
-    <p></p>
+    <div ng-view></div>
   </div>
-  <div ng-view></div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
   <script src="app.js"></script>

@@ -6,7 +6,7 @@ app.$inject = ['$http'];
 
 function home($http) {
   var vm = this;
-  vm.message = 'Welcome home'
+  vm.message = 'Get started'
 
   var user = $http.get('http://localhost:1337/user');
   user.then(function(info) {
