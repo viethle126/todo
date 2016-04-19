@@ -38,7 +38,7 @@ app.route('/todos')
     mongoClient.connect(url, function(error, db) {
       if (!error) {
         var todos = db.collection('todos');
-        todos.find({}).toArray(function(error, result) {
+        todos.find({}, {'sort': 'due'}).toArray(function(error, result) {
           res.send(result);
           db.close();
         })

@@ -6,6 +6,7 @@ app.$inject = ['$http'];
 
 function todo($http) {
   vm = this;
+  vm.today = new Date();
   vm.completed = [];
 
   (vm.refresh = function() {
@@ -27,10 +28,11 @@ function todo($http) {
     vm.completed.splice(position, 1);
   }
 
-  vm.add = function(what) {
+  vm.add = function(what, when) {
     var task = what;
+    var due = when;
     var added = $http.post('http://localhost:1337/todos',
-      { task: what }
+      { task: what, due: when }
     );
     added.then(function() {
       vm.refresh();
