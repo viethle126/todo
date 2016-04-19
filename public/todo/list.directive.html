@@ -7,6 +7,9 @@
     <span>
       {{item.task}}
     </span>
+    <span class="pull-right" ng-if="item.due">
+      Deadline: {{item.due | date:'MM-dd-yy'}}
+    </span>
   </button>
   <div class="list-group-item list-group-item-success">
     <span ng-show="todo.completed.length !== 0">Items completed: {{todo.completed.length}}</span>
@@ -15,6 +18,9 @@
   <button type="button" class="list-group-item" ng-repeat="item in todo.completed" ng-click="todo.undo(item)">
     <span>
       {{item.task}}
+    </span>
+    <span class="pull-right">
+      Completed: {{todo.today | date:'MM-dd-yy'}}
     </span>
   </button>
 </div>
