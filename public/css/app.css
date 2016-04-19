@@ -18,3 +18,9 @@ button {
   margin-top: 3px !important;
   opacity: .95;
 }
+
+.list-group-item-success {
+  color: #fff;
+  background-color: rgba(210, 80, 75, .95);
+  border: 1px solid rgba(210, 80, 75, .95);
+}
