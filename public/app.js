@@ -9,7 +9,5 @@ app.config(['$routeProvider', function($routeProvider) {
   })
   .when('/profile', {
     templateUrl: 'profile/profile.html',
-    controller: 'profileController',
-    controllerAs: 'profile'
   })
 }]);
