@@ -29,9 +29,9 @@ describe('Todos', function() {
   describe('Post request to /todos', function() {
     before(function(done) {
       request({
-        url: 'http://localhost:' + port + '/todos',
+        url: 'http://localhost:' + port + '/todos/Viet',
         method: 'POST',
-        json: { task: 'Test routes' }
+        json: { task: 'Test routes', user: 'Viet' }
       }, function(error, response, body) {
         done();
       })
@@ -55,7 +55,7 @@ describe('Todos', function() {
   // read
   describe('Get request to /todos', function() {
     it('is reading database', function(done) {
-      request('http://localhost:' + port + '/todos',
+      request('http://localhost:' + port + '/todos/Viet',
         function(error, response, body) {
           var parsed = JSON.parse(body);
           assert.equal(error, null);
@@ -69,7 +69,7 @@ describe('Todos', function() {
   describe('Delete request to /todos', function() {
     it('is deleting from database', function(done) {
       request({
-        url: 'http://localhost:' + port + '/todos',
+        url: 'http://localhost:' + port + '/todos/Viet',
         method: 'DELETE',
         json: { items: items }
       }, function(error, response, body) {
