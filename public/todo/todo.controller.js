@@ -12,6 +12,14 @@ function todo($http) {
   (vm.refresh = function() {
     var todos = $http.get('http://localhost:1337/todos');
     todos.then(function(todo) {
+      // check which items are still in vm.completed
+      vm.completed.forEach(function(completed, ind, arr) {
+        todo.data.forEach(function(todo, index, array) {
+          if (completed._id === todo._id) {
+            array.splice(index, 1);
+          }
+        })
+      })
       vm.list = todo.data;
     })
   })()
@@ -24,8 +32,9 @@ function todo($http) {
 
   vm.undo = function(item) {
     var position = vm.completed.indexOf(item);
-    vm.list.push(vm.completed[position]);
+    vm.list.push(item);
     vm.completed.splice(position, 1);
+    vm.refresh();
   }
 
   vm.add = function(what, when) {
@@ -37,6 +46,7 @@ function todo($http) {
     added.then(function() {
       vm.refresh();
       vm.task = '';
+      vm.date = '';
     })
   }
 
