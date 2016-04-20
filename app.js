@@ -15,7 +15,7 @@ app.get('/user', function(req, res) {
   res.json(user);
 })
 
-app.route('/todos')
+app.route('/todos/:user')
   .post(function(req, res) {
     var item = req.body;
     mongoClient.connect(url, function(error, db) {
@@ -35,10 +35,11 @@ app.route('/todos')
     })
   })
   .get(function(req, res) {
+    var user = req.params.user;
     mongoClient.connect(url, function(error, db) {
       if (!error) {
         var todos = db.collection('todos');
-        todos.find({}, {'sort': 'due'}).toArray(function(error, result) {
+        todos.find({ user: user }, { 'sort': 'due' }).toArray(function(error, result) {
           res.send(result);
           db.close();
         })
