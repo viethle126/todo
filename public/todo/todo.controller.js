@@ -2,26 +2,30 @@ var app = angular.module('todo');
 
 app.controller('todoController', todo);
 
-app.$inject = ['$http'];
+app.$inject = ['$http', 'users'];
 
-function todo($http) {
+function todo($http, users) {
   vm = this;
   vm.today = new Date();
   vm.completed = [];
 
   (vm.refresh = function() {
-    var todos = $http.get('http://localhost:1337/todos');
-    todos.then(function(todo) {
-      // check which items are still in vm.completed
-      vm.completed.forEach(function(completed, ind, arr) {
-        todo.data.forEach(function(todo, index, array) {
-          if (completed._id === todo._id) {
-            array.splice(index, 1);
-          }
+    var user = users.getUser();
+    user.then(function(info) {
+      vm.user = info.data.name;
+      var todos = $http.get('http://localhost:1337/todos/' + vm.user);
+      todos.then(function(todo) {
+        // check which items are still in vm.completed
+        vm.completed.forEach(function(completed, ind, arr) {
+          todo.data.forEach(function(todo, index, array) {
+            if (completed._id === todo._id) {
+              array.splice(index, 1);
+            }
+          })
         })
+        vm.list = todo.data;
       })
-      vm.list = todo.data;
-    })
+    });
   })()
 
   vm.finished = function(item) {
@@ -37,11 +41,9 @@ function todo($http) {
     vm.refresh();
   }
 
-  vm.add = function(what, when) {
-    var task = what;
-    var due = when;
-    var added = $http.post('http://localhost:1337/todos',
-      { task: what, due: when }
+  vm.add = function(what, when, who) {
+    var added = $http.post('http://localhost:1337/todos/' + vm.user,
+      { task: what, due: when, user: who }
     );
     added.then(function() {
       vm.refresh();
@@ -52,7 +54,7 @@ function todo($http) {
 
   vm.clear = function() {
     var removed = $http({
-      url: 'http://localhost:1337/todos',
+      url: 'http://localhost:1337/todos/' + vm.user,
       method: 'DELETE',
       headers: {'Content-type': 'application/json'},
       data: { items: vm.completed }

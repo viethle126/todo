@@ -1,17 +1,18 @@
 body {
-  background-color: #f5f8fa;
+  padding-top: 40px;
+  background-image: url('../images/background.jpg');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
 }
 
 button {
   opacity: .95;
 }
 
-.wrapper {
-  margin: 20px !important;
-  padding: 20px !important;
-  max-width: 625px;
-  background-image: url('../images/background.jpg');
-  background-size: cover;
+.container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 900px !important;
 }
 
 .list-group-item {

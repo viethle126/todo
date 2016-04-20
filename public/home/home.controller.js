@@ -2,13 +2,13 @@ var app = angular.module('todo');
 
 app.controller('homeController', home);
 
-app.$inject = ['$http'];
+app.$inject = ['$http', 'users'];
 
-function home($http) {
+function home($http, users) {
   var vm = this;
   vm.message = 'Get started'
 
-  var user = $http.get('http://localhost:1337/user');
+  var user = users.getUser();
   user.then(function(info) {
     vm.user = info.data;
   });
