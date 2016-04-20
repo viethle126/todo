@@ -1,4 +1,4 @@
-<form class="form-inline" ng-submit="todo.add(todo.task, todo.date)">
+<form class="form-inline" ng-submit="todo.add(todo.task, todo.date, todo.user)">
   <div class="form-group">
     <input type="text" class="form-control" placeholder="Add a task" ng-model="todo.task" required>
     <input type="date" min="{{todo.today | date:'yyyy-MM-dd'}}" class="form-control" ng-model="todo.date">
