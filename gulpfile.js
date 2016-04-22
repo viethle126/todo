@@ -5,9 +5,13 @@ var eslint = require('gulp-eslint');
 var nodemon = require('gulp-nodemon');
 
 var app = require('./app.js');
-var server = app.listen(1337);
+var server = '';
 
-gulp.task('lint', function() {
+gulp.task('start', function() {
+  server = app.listen(1337);
+})
+
+gulp.task('lint', ['start'], function() {
   return gulp.src(['app.js', '!node_modules/**'])
   .pipe(eslint())
   .pipe(eslint.format())
@@ -28,13 +32,7 @@ gulp.task('test', ['casper'], function() {
   server.close();
 })
 
-gulp.task('default', ['test'], function() {
-  var start = new Promise(function(resolve, reject) {
-    server.close();
-    resolve(response);
-  })
-  start.then(function() {
-    nodemon({ script: 'app.js' })
-    .on('start', ['casper'])
-  })
+gulp.task('default', ['casper'], function() {
+  server.close();
+  nodemon({ script: 'app.js' })
 })

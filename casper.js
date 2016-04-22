@@ -32,8 +32,8 @@ casper.test.begin('Check links, add todo and clear todo', 4, function suite(test
     this.clickLabel('Clear Completed', 'button');
   })
 
-  casper.then(function() {
-    test.assertTextDoesntExist('CasperJS', 'Successfully cleared new todo');
+  casper.waitForSelector(x('//*[contains(span, "Items completed: 0")]'), function() {
+    test.assertDoesntExist(x('//*[contains(span, "Items completed: 1")]'), 'Successfully cleared new todo');
   })
 
   casper.run(function() {
