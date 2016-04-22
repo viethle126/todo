@@ -4,6 +4,9 @@ var casperJS = require('gulp-casperjs');
 var eslint = require('gulp-eslint');
 var nodemon = require('gulp-nodemon');
 
+var app = require('./app.js');
+var server = app.listen(1337);
+
 gulp.task('lint', function() {
   return gulp.src(['app.js', '!node_modules/**'])
   .pipe(eslint())
@@ -16,12 +19,22 @@ gulp.task('mocha', ['lint'], function () {
   .pipe(mocha())
 })
 
-gulp.task('casper', function() {
+gulp.task('casper', ['mocha'], function() {
   return gulp.src('casper.js')
   .pipe(casperJS())
 })
 
-gulp.task('default', function() {
-  nodemon({ script: 'app.js' })
-  .on('start', ['mocha', 'casper'])
+gulp.task('test', ['casper'], function() {
+  server.close();
+})
+
+gulp.task('default', ['test'], function() {
+  var start = new Promise(function(resolve, reject) {
+    server.close();
+    resolve(response);
+  })
+  start.then(function() {
+    nodemon({ script: 'app.js' })
+    .on('start', ['casper'])
+  })
 })
