@@ -16,12 +16,12 @@ gulp.task('mocha', ['lint'], function () {
   .pipe(mocha())
 })
 
-gulp.task('test', ['mocha'], function() {
+gulp.task('casper', function() {
   return gulp.src('casper.js')
   .pipe(casperJS())
 })
 
 gulp.task('default', function() {
   nodemon({ script: 'app.js' })
-  .on('start', ['test'])
+  .on('start', ['mocha', 'casper'])
 })

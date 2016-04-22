@@ -75,6 +75,7 @@ app.use(express.static('./'));
 
 if (!require.main.loaded) {
   var server = app.listen(1337);
+  process.env.PORT = server.address().port;
 }
 
 module.exports = app;
