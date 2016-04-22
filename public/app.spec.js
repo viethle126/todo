@@ -39,26 +39,26 @@ page.open(url, function start(status) {
 })
 
 setTimeout(function() {
-  page.render('phantom/01.landing.jpg', { format: 'jpg', quality: '100' });
+  page.render('../testing/phantom/01.landing.jpg', { format: 'jpg', quality: '100' });
 }, 1500);
 
 setTimeout(function() {
-  page.render('phantom/02.profile.jpg', { format: 'jpg', quality: '100' });
+  page.render('../testing/phantom/02.profile.jpg', { format: 'jpg', quality: '100' });
 }, 4000);
 
 setTimeout(function() {
-  page.render('phantom/03.todo.jpg', { format: 'jpg', quality: '100' });
+  page.render('../testing/phantom/03.todo.jpg', { format: 'jpg', quality: '100' });
 }, 6000);
 
 setTimeout(function() {
-  page.render('phantom/04.added.jpg', { format: 'jpg', quality: '100' });
+  page.render('../testing/phantom/04.added.jpg', { format: 'jpg', quality: '100' });
 }, 7500);
 
 setTimeout(function() {
-  page.render('phantom/05.completed.jpg', { format: 'jpg', quality: '100' });
+  page.render('../testing/phantom/05.completed.jpg', { format: 'jpg', quality: '100' });
 }, 9000);
 
 setTimeout(function() {
-  page.render('phantom/06.cleared.jpg', { format: 'jpg', quality: '100' });
+  page.render('../testing/phantom/06.cleared.jpg', { format: 'jpg', quality: '100' });
   phantom.exit();
 }, 10500);
