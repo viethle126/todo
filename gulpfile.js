@@ -17,9 +17,11 @@ gulp.task('mocha', ['lint'], function () {
 })
 
 gulp.task('test', ['mocha'], function() {
-  nodemon({ script: 'app.js' })
   return gulp.src('casper.js')
   .pipe(casperJS())
 })
 
-gulp.task('default', ['test'])
+gulp.task('default', function() {
+  nodemon({ script: 'app.js' })
+  .on('start', ['test'])
+})

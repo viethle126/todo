@@ -1,7 +1,9 @@
 var x = require('casper').selectXPath;
+var system = require('system');
+var port = system.env.PORT || 1337;
 
 casper.test.begin('Check links, add todo and clear todo', 4, function suite(test) {
-  casper.start('http://localhost:1337');
+  casper.start('http://localhost:' + port);
 
   casper.then(function() {
     this.click('a[href^="#/profile"]');
